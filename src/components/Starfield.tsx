@@ -83,9 +83,9 @@ const Starfield = ({ className = "" }: StarfieldProps) => {
     // Each dot is a "star" that gently repels from cursor
     // ============================================================
 
-    const DOT_SPACING = 14;
+    const DOT_SPACING = 10;
     const DOT_RADIUS = 0.8;
-    const DOT_ALPHA = 0.16;
+    const DOT_ALPHA = 0.7;
     const REPULSE_RADIUS = 25;
     const REPULSE_STRENGTH = 6;
     const SPRING_BACK = 0.06;
@@ -288,9 +288,9 @@ const Starfield = ({ className = "" }: StarfieldProps) => {
     let time = 0;
 
     const updateAndDrawGrid = () => {
-      // Smooth mouse interpolation
-      mouseX += (targetMouseX - mouseX) * 0.1;
-      mouseY += (targetMouseY - mouseY) * 0.1;
+      // Direct cursor tracking — no streak/trail
+      mouseX = targetMouseX;
+      mouseY = targetMouseY;
 
       time += 0.015;
 
@@ -324,15 +324,26 @@ const Starfield = ({ className = "" }: StarfieldProps) => {
         dot.x += dot.vx;
         dot.y += dot.vy;
 
-        // Subtle shimmer — slow wave based on position + time
-        const shimmer = 0.7 + 0.3 * Math.sin(
-          dot.baseX * 0.08 + dot.baseY * 0.06 + time
-        );
-        ctx.fillStyle = `rgba(255, 255, 255, ${DOT_ALPHA * shimmer})`;
+        ctx.fillStyle = `rgba(255, 255, 255, ${DOT_ALPHA})`;
 
-        // Draw dot — always visible
+        // Draw as tiny 4-pointed diamond star ✦
+        const r = DOT_RADIUS;
+        const spike = r * 2.2; // spike length
         ctx.beginPath();
-        ctx.arc(dot.x, dot.y, DOT_RADIUS, 0, Math.PI * 2);
+        ctx.moveTo(dot.x, dot.y - spike);     // top
+        ctx.lineTo(dot.x + r * 0.35, dot.y);  // right-center
+        ctx.lineTo(dot.x, dot.y + spike);     // bottom
+        ctx.lineTo(dot.x - r * 0.35, dot.y);  // left-center
+        ctx.closePath();
+        ctx.fill();
+
+        // Horizontal spike
+        ctx.beginPath();
+        ctx.moveTo(dot.x - spike, dot.y);     // left
+        ctx.lineTo(dot.x, dot.y + r * 0.35);  // bottom-center
+        ctx.lineTo(dot.x + spike, dot.y);     // right
+        ctx.lineTo(dot.x, dot.y - r * 0.35);  // top-center
+        ctx.closePath();
         ctx.fill();
       }
     };
