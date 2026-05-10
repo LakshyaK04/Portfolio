@@ -138,7 +138,7 @@ function App() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="w-full mt-24"
         >
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-16">
+          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-14">
             My Work
           </h2>
 
@@ -151,7 +151,7 @@ function App() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.7 }}
             >
-              <div className="rounded-3xl overflow-hidden bg-[#1a1a1c] border border-zinc-700/50">
+              <div className="rounded-2xl overflow-hidden bg-[#1a1a1c] border border-zinc-700/40">
                 <div className="relative group cursor-pointer">
                   <img
                     src="/project-emporium.png"
@@ -165,14 +165,14 @@ function App() {
                     </span>
                   </div>
                 </div>
-                <div className="px-6 py-5">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-lg font-semibold text-white tracking-tight italic">Emporium</h3>
-                    <a href="#" className="w-8 h-8 rounded-full border border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-white hover:border-zinc-500 transition-colors" aria-label="View Emporium project">
+                <div className="px-6 py-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-xl font-bold text-white tracking-tight italic">Emporium</h3>
+                    <a href="#" className="w-9 h-9 rounded-full border border-zinc-600/60 flex items-center justify-center text-zinc-400 hover:text-white hover:border-zinc-400 transition-colors" aria-label="View Emporium project">
                       <ArrowUpRight size={18} />
                     </a>
                   </div>
-                  <p className="text-zinc-500 text-sm leading-relaxed">
+                  <p className="text-zinc-400 text-sm md:text-base leading-relaxed">
                     AI-powered CRM and customer engagement platform built from zero to production. 0→1 product vision, marketing
                     website, onboarding, dashboard UX, and design system.
                   </p>
@@ -187,7 +187,7 @@ function App() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.7 }}
             >
-              <div className="rounded-3xl overflow-hidden bg-[#1a1a1c] border border-zinc-700/50">
+              <div className="rounded-2xl overflow-hidden bg-[#1a1a1c] border border-zinc-700/40">
                 <div className="relative group cursor-pointer">
                   <img
                     src="/project-eleen.png"
@@ -201,14 +201,14 @@ function App() {
                     </span>
                   </div>
                 </div>
-                <div className="px-6 py-5">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-lg font-semibold text-white tracking-tight italic">EleeN</h3>
-                    <a href="#" className="w-8 h-8 rounded-full border border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-white hover:border-zinc-500 transition-colors" aria-label="View EleeN project">
+                <div className="px-6 py-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-xl font-bold text-white tracking-tight italic">EleeN</h3>
+                    <a href="#" className="w-9 h-9 rounded-full border border-zinc-600/60 flex items-center justify-center text-zinc-400 hover:text-white hover:border-zinc-400 transition-colors" aria-label="View EleeN project">
                       <ArrowUpRight size={18} />
                     </a>
                   </div>
-                  <p className="text-zinc-500 text-sm leading-relaxed">
+                  <p className="text-zinc-400 text-sm md:text-base leading-relaxed">
                     Enterprise SaaS platform with modern dark-themed design. Product strategy, landing page, platform architecture, and end-to-end user experience.
                   </p>
                 </div>
@@ -222,7 +222,7 @@ function App() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.7 }}
             >
-              <div className="rounded-3xl overflow-hidden bg-[#1a1a1c] border border-zinc-700/50">
+              <div className="rounded-2xl overflow-hidden bg-[#1a1a1c] border border-zinc-700/40">
                 <div className="relative group cursor-pointer">
                   <img
                     src="/project-nexus.png"
@@ -236,14 +236,14 @@ function App() {
                     </span>
                   </div>
                 </div>
-                <div className="px-6 py-5">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-lg font-semibold text-white tracking-tight italic">Nexus AI</h3>
-                    <a href="#" className="w-8 h-8 rounded-full border border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-white hover:border-zinc-500 transition-colors" aria-label="View Nexus AI project">
+                <div className="px-6 py-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-xl font-bold text-white tracking-tight italic">Nexus AI</h3>
+                    <a href="#" className="w-9 h-9 rounded-full border border-zinc-600/60 flex items-center justify-center text-zinc-400 hover:text-white hover:border-zinc-400 transition-colors" aria-label="View Nexus AI project">
                       <ArrowUpRight size={18} />
                     </a>
                   </div>
-                  <p className="text-zinc-500 text-sm leading-relaxed">
+                  <p className="text-zinc-400 text-sm md:text-base leading-relaxed">
                     AI-powered analytics platform with real-time data visualization, machine learning model monitoring, and intelligent insights dashboard.
                   </p>
                 </div>
