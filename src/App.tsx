@@ -3,6 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Home, Download, ArrowUpRight, Copy, ChevronDown, ChevronUp } from 'lucide-react';
 import Starfield from './components/Starfield';
 import { supabase } from './lib/supabase';
+import schedulrImg from './assets/project-schedulr.png';
+import quickBidImg from './assets/project-quickbid.png';
+import aquafootprintImg from './assets/project-aquafootprint.png';
+import profilePic from './assets/profile-pic.jpg';
 
 function App() {
   const [expandedExp, setExpandedExp] = useState<number | null>(null);
@@ -50,18 +54,18 @@ function App() {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="w-full max-w-4xl px-6 pt-12 flex justify-between items-center z-20 relative"
       >
-        <button className="flex items-center gap-2 bg-[#1c1c1e] hover:bg-[#2c2c2e] transition-colors px-4 py-2 rounded-full text-sm font-medium text-zinc-300">
+        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-2 bg-[#1c1c1e] hover:bg-[#2c2c2e] transition-colors px-4 py-2 rounded-full text-sm font-medium text-zinc-300">
           <Home size={16} />
           <span>Home</span>
         </button>
 
         <div className="flex gap-3">
-          <button className="bg-[#1c1c1e] hover:bg-[#2c2c2e] transition-colors px-4 py-2 rounded-full text-sm font-medium text-zinc-300">
+          <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#1c1c1e] hover:bg-[#2c2c2e] transition-colors px-4 py-2 rounded-full text-sm font-medium text-zinc-300">
             Contact Me
           </button>
-          <button className="bg-[#1c1c1e] hover:bg-[#2c2c2e] transition-colors px-4 py-2 rounded-full text-sm font-medium text-zinc-300">
+          <a href="https://drive.google.com/file/d/1odoUdZCXTGj6MNZ-9pBesp1AYWpGH90f/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="bg-[#1c1c1e] hover:bg-[#2c2c2e] transition-colors px-4 py-2 rounded-full text-sm font-medium text-zinc-300 flex items-center">
             My CV
-          </button>
+          </a>
         </div>
       </motion.nav>
 
@@ -81,8 +85,8 @@ function App() {
           {/* Avatar Overlapping Bottom Edge */}
           <div className="absolute -bottom-10 left-8 md:left-12 z-20">
             <img 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&h=200&auto=format&fit=crop" 
-              alt="Profile" 
+              src={profilePic} 
+              alt="Lakshya Kapoor" 
               className="w-24 h-24 md:w-28 md:h-28 rounded-full border-[4px] border-[#111111] object-cover shadow-2xl bg-[#111111]"
             />
           </div>
@@ -124,22 +128,6 @@ function App() {
             </p>
           </motion.div>
 
-          {/* Copy Email Section */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex items-center gap-2 mb-10 text-sm font-medium text-white"
-          >
-            <span>Press</span>
-            <kbd className="bg-[#1c1c1e] px-2 py-0.5 rounded text-white font-mono text-xs shadow-inner">
-               M
-            </kbd>
-            <span>to copy my email</span>
-            <button onClick={copyEmail} className="ml-2 text-zinc-500 hover:text-white transition-colors" aria-label="Copy email">
-              <Copy size={14} />
-            </button>
-          </motion.div>
 
           {/* Action Buttons */}
           <motion.div 
@@ -148,14 +136,22 @@ function App() {
             transition={{ duration: 0.8, delay: 0.7 }}
             className="flex flex-wrap gap-4"
           >
-            <button className="group flex items-center gap-2 bg-[#1c1c1e] hover:bg-[#2c2c2e] text-zinc-300 px-5 py-2.5 rounded-full text-sm font-medium transition-all">
+            <button 
+              onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
+              className="group flex items-center gap-2 bg-[#1c1c1e] hover:bg-[#2c2c2e] text-zinc-300 px-5 py-2.5 rounded-full text-sm font-medium transition-all"
+            >
               View work
               <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform text-zinc-500" />
             </button>
-            <button className="group flex items-center gap-2 bg-[#1c1c1e] hover:bg-[#2c2c2e] text-zinc-300 px-5 py-2.5 rounded-full text-sm font-medium transition-all">
+            <a 
+              href="https://drive.google.com/file/d/1odoUdZCXTGj6MNZ-9pBesp1AYWpGH90f/view?usp=sharing" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="group flex items-center gap-2 bg-[#1c1c1e] hover:bg-[#2c2c2e] text-zinc-300 px-5 py-2.5 rounded-full text-sm font-medium transition-all"
+            >
               Download CV
               <Download size={16} className="group-hover:translate-y-0.5 transition-transform text-zinc-500" />
-            </button>
+            </a>
           </motion.div>
         </div>
 
@@ -164,6 +160,7 @@ function App() {
         {/* ============================================================ */}
 
         <motion.section
+          id="work"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -176,7 +173,7 @@ function App() {
 
           <div className="flex flex-col gap-12">
 
-            {/* Project 1 — Emporium */}
+            {/* Project 1 — Schedulr */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -184,35 +181,34 @@ function App() {
               transition={{ duration: 0.7 }}
             >
               <div className="rounded-2xl overflow-hidden bg-[#1a1a1c] border border-zinc-700/40">
-                <div className="relative group cursor-pointer">
+                <a href="https://schedulr-web.vercel.app/" target="_blank" rel="noopener noreferrer" className="relative group block cursor-pointer">
                   <img
-                    src="/project-emporium.png"
-                    alt="Emporium — AI-powered CRM platform"
+                    src={schedulrImg}
+                    alt="Schedulr — Full Stack Healthcare Appointment Platform"
                     className="w-full h-auto max-h-[380px] object-cover object-top"
                   />
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <span className="flex items-center gap-2 bg-white text-black px-5 py-2.5 rounded-full text-sm font-medium">
-                      View Project
+                      Visit Live Site
                       <ArrowUpRight size={16} />
                     </span>
                   </div>
-                </div>
+                </a>
                 <div className="px-6 py-6">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-xl font-bold text-white tracking-tight italic">Emporium</h3>
-                    <a href="#" className="w-9 h-9 rounded-full border border-zinc-600/60 flex items-center justify-center text-zinc-400 hover:text-white hover:border-zinc-400 transition-colors" aria-label="View Emporium project">
+                    <h3 className="text-xl font-bold text-white tracking-tight italic">Schedulr</h3>
+                    <a href="https://schedulr-web.vercel.app/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full border border-zinc-600/60 flex items-center justify-center text-zinc-400 hover:text-white hover:border-zinc-400 transition-colors" aria-label="View Schedulr project">
                       <ArrowUpRight size={18} />
                     </a>
                   </div>
                   <p className="text-zinc-400 text-sm md:text-base leading-relaxed">
-                    AI-powered CRM and customer engagement platform built from zero to production. 0→1 product vision, marketing
-                    website, onboarding, dashboard UX, and design system.
+                    Engineered a modern full stack healthcare platform designed for efficient appointment scheduling and streamlined user interaction. Focused on scalable backend architecture, secure authentication systems, and responsive frontend experiences using modern web technologies.
                   </p>
                 </div>
               </div>
             </motion.div>
 
-            {/* Project 2 — EleeN */}
+            {/* Project 2 — QuickBid */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -220,34 +216,34 @@ function App() {
               transition={{ duration: 0.7 }}
             >
               <div className="rounded-2xl overflow-hidden bg-[#1a1a1c] border border-zinc-700/40">
-                <div className="relative group cursor-pointer">
+                <a href="https://quick-bid-project.vercel.app/" target="_blank" rel="noopener noreferrer" className="relative group block cursor-pointer">
                   <img
-                    src="/project-eleen.png"
-                    alt="EleeN — Enterprise SaaS platform"
+                    src={quickBidImg}
+                    alt="QuickBid — Real-Time Bidding Platform"
                     className="w-full h-auto max-h-[380px] object-cover object-top"
                   />
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <span className="flex items-center gap-2 bg-white text-black px-5 py-2.5 rounded-full text-sm font-medium">
-                      View Project
+                      Visit Live Site
                       <ArrowUpRight size={16} />
                     </span>
                   </div>
-                </div>
+                </a>
                 <div className="px-6 py-6">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-xl font-bold text-white tracking-tight italic">EleeN</h3>
-                    <a href="#" className="w-9 h-9 rounded-full border border-zinc-600/60 flex items-center justify-center text-zinc-400 hover:text-white hover:border-zinc-400 transition-colors" aria-label="View EleeN project">
+                    <h3 className="text-xl font-bold text-white tracking-tight italic">QuickBid</h3>
+                    <a href="https://quick-bid-project.vercel.app/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full border border-zinc-600/60 flex items-center justify-center text-zinc-400 hover:text-white hover:border-zinc-400 transition-colors" aria-label="View QuickBid project">
                       <ArrowUpRight size={18} />
                     </a>
                   </div>
                   <p className="text-zinc-400 text-sm md:text-base leading-relaxed">
-                    Enterprise SaaS platform with modern dark-themed design. Product strategy, landing page, platform architecture, and end-to-end user experience.
+                    Engineered a real-time bidding platform focused on speed, scalability, and seamless live user interaction using modern full stack technologies. Built responsive real-time systems with synchronized updates, WebSocket communication, and optimized backend workflows for smooth auction experiences.
                   </p>
                 </div>
               </div>
             </motion.div>
 
-            {/* Project 3 — Nexus AI */}
+            {/* Project 3 — AquaFootprint AI */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -255,28 +251,28 @@ function App() {
               transition={{ duration: 0.7 }}
             >
               <div className="rounded-2xl overflow-hidden bg-[#1a1a1c] border border-zinc-700/40">
-                <div className="relative group cursor-pointer">
+                <a href="https://aqua-footprint-ai.vercel.app/" target="_blank" rel="noopener noreferrer" className="relative group block cursor-pointer">
                   <img
-                    src="/project-nexus.png"
-                    alt="Nexus AI — Analytics dashboard"
+                    src={aquafootprintImg}
+                    alt="AquaFootprint AI — Sustainable Agriculture Platform"
                     className="w-full h-auto max-h-[380px] object-cover object-top"
                   />
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <span className="flex items-center gap-2 bg-white text-black px-5 py-2.5 rounded-full text-sm font-medium">
-                      View Project
+                      Visit Live Site
                       <ArrowUpRight size={16} />
                     </span>
                   </div>
-                </div>
+                </a>
                 <div className="px-6 py-6">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-xl font-bold text-white tracking-tight italic">Nexus AI</h3>
-                    <a href="#" className="w-9 h-9 rounded-full border border-zinc-600/60 flex items-center justify-center text-zinc-400 hover:text-white hover:border-zinc-400 transition-colors" aria-label="View Nexus AI project">
+                    <h3 className="text-xl font-bold text-white tracking-tight italic">AquaFootprint AI</h3>
+                    <a href="https://aqua-footprint-ai.vercel.app/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full border border-zinc-600/60 flex items-center justify-center text-zinc-400 hover:text-white hover:border-zinc-400 transition-colors" aria-label="View AquaFootprint AI project">
                       <ArrowUpRight size={18} />
                     </a>
                   </div>
                   <p className="text-zinc-400 text-sm md:text-base leading-relaxed">
-                    AI-powered analytics platform with real-time data visualization, machine learning model monitoring, and intelligent insights dashboard.
+                    Engineered an AI-powered water footprint calculator for sustainable agriculture. Integrated satellite data and real-time climate inputs to provide accurate insights, optimize water usage, and promote climate-resilient farming practices.
                   </p>
                 </div>
               </div>
@@ -586,7 +582,7 @@ function App() {
         {/* FOOTER */}
         {/* ============================================================ */}
 
-        <footer className="w-full mt-24 mb-8">
+        <footer id="contact" className="w-full mt-24 mb-8">
           <div className="w-full h-px bg-zinc-800/60 mb-0" />
           
           {/* Top row */}
