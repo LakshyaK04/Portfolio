@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Download, ArrowUpRight, ChevronDown, ChevronUp } from 'lucide-react';
 import Starfield from '../components/Starfield';
-import { supabase } from '../lib/supabase';
+
 import schedulrImg from '../assets/project-schedulr.png';
 import quickBidImg from '../assets/project-quickbid.png';
 import aquafootprintImg from '../assets/project-aquafootprint.png';

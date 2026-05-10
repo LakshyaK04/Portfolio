@@ -137,7 +137,7 @@ function App() {
         setVisitorCount(data.count);
 
         // Increment on every reload
-        const { error } = await supabase
+        await supabase
           .from('visitors')
           .update({ count: data.count + 1 })
           .eq('id', 1);
