@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, ArrowUpRight, Copy, ChevronDown, ChevronUp } from 'lucide-react';
+import { Download, ArrowUpRight, ChevronDown, ChevronUp } from 'lucide-react';
 import Starfield from '../components/Starfield';
 import { supabase } from '../lib/supabase';
 import schedulrImg from '../assets/project-schedulr.png';
@@ -11,7 +11,6 @@ import profilePic from '../assets/profile-pic.jpg';
 export default function Home() {
   const [expandedExp, setExpandedExp] = useState<number | null>(null);
   const [hoveredSkill, setHoveredSkill] = useState<number | null>(null);
-  const [visitorCount, setVisitorCount] = useState(0);
   const hasCountedRef = useRef(false);
 
   useEffect(() => {
@@ -31,16 +30,12 @@ export default function Home() {
         .from('visitors')
         .update({ count: newCount })
         .eq('id', 1);
-
-      setVisitorCount(newCount);
     }
 
     incrementVisitor();
   }, []);
 
-  const copyEmail = () => {
-    navigator.clipboard.writeText("kapoorlakshya42@gmail.com");
-  };
+
 
   return (
     <>

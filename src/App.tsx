@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Home as HomeIcon, Download } from 'lucide-react';
+import { Home as HomeIcon } from 'lucide-react';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
 import { supabase } from './lib/supabase';
@@ -8,7 +8,6 @@ import { useState, useEffect } from 'react';
 
 function Navigation() {
   const location = useLocation();
-  const isHome = location.pathname === '/';
 
   return (
     <motion.nav 
