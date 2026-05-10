@@ -83,7 +83,7 @@ const Starfield = ({ className = "" }: StarfieldProps) => {
     // Each dot is a "star" that gently repels from cursor
     // ============================================================
 
-    const DOT_SPACING = 10;
+    const DOT_SPACING = 14;
     const DOT_RADIUS = 0.8;
     const DOT_ALPHA = 0.7;
     const REPULSE_RADIUS = 25;
