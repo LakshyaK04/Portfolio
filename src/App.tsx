@@ -48,7 +48,25 @@ function Navigation() {
   );
 }
 
+
 function Footer({ visitorCount }: { visitorCount: number }) {
+  const getOrdinalSuffix = (num: number) => {
+    const n = Math.floor(num);
+    const j = n % 10,
+          k = n % 100;
+    if (j === 1 && k !== 11) {
+      return "st";
+    }
+    if (j === 2 && k !== 12) {
+      return "nd";
+    }
+    if (j === 3 && k !== 13) {
+      return "rd";
+    }
+    return "th";
+  };
+
+
   return (
     <footer id="contact" className="w-full mt-24 mb-8">
       <div className="w-full h-px bg-zinc-800/60 mb-0" />
@@ -60,7 +78,11 @@ function Footer({ visitorCount }: { visitorCount: number }) {
             📍 Based in India, developing worldwide 🌍
           </span>
           <span className="text-zinc-400 text-sm flex items-center gap-1.5 mt-1">
-            🎉 You're the {visitorCount > 0 ? `${visitorCount}${visitorCount === 1 ? 'st' : visitorCount === 2 ? 'nd' : visitorCount === 3 ? 'rd' : 'th'}` : '...'} visitor
+            🎉 You're the{" "}
+            {visitorCount > 0
+              ? `${visitorCount}${getOrdinalSuffix(visitorCount)}`
+              : "..."}{" "}
+            visitor
           </span>
         </div>
       </div>
@@ -103,16 +125,25 @@ function App() {
   const [visitorCount, setVisitorCount] = useState(0);
 
   useEffect(() => {
-    async function getVisitorCount() {
+    async function handleVisitorCount() {
+      // Get current count
       const { data } = await supabase
         .from('visitors')
         .select('count')
         .eq('id', 1)
         .single();
       
-      if (data) setVisitorCount(data.count);
+      if (data) {
+        setVisitorCount(data.count);
+
+        // Increment on every reload
+        const { error } = await supabase
+          .from('visitors')
+          .update({ count: data.count + 1 })
+          .eq('id', 1);
+      }
     }
-    getVisitorCount();
+    handleVisitorCount();
 
     // Set up real-time listener
     const subscription = supabase

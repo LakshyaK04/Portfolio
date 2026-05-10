@@ -11,31 +11,6 @@ import profilePic from '../assets/profile-pic.jpg';
 export default function Home() {
   const [expandedExp, setExpandedExp] = useState<number | null>(null);
   const [hoveredSkill, setHoveredSkill] = useState<number | null>(null);
-  const hasCountedRef = useRef(false);
-
-  useEffect(() => {
-    if (hasCountedRef.current) return;
-    hasCountedRef.current = true;
-
-    async function incrementVisitor() {
-      const { data: current } = await supabase
-        .from('visitors')
-        .select('count')
-        .eq('id', 1)
-        .single();
-
-      const newCount = (current?.count || 0) + 1;
-
-      await supabase
-        .from('visitors')
-        .update({ count: newCount })
-        .eq('id', 1);
-    }
-
-    incrementVisitor();
-  }, []);
-
-
 
   return (
     <>
