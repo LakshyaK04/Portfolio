@@ -9,7 +9,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0e0e10] text-zinc-100 font-sans selection:bg-zinc-800 flex flex-col items-center">
+    <div className="min-h-screen bg-[#111111] text-zinc-100 font-sans selection:bg-zinc-800 flex flex-col items-center">
       
       {/* Top Navigation */}
       <motion.nav 
@@ -51,7 +51,7 @@ function App() {
             <img 
               src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&h=200&auto=format&fit=crop" 
               alt="Profile" 
-              className="w-24 h-24 md:w-28 md:h-28 rounded-full border-[4px] border-[#0e0e10] object-cover shadow-2xl bg-[#0e0e10]"
+              className="w-24 h-24 md:w-28 md:h-28 rounded-full border-[4px] border-[#111111] object-cover shadow-2xl bg-[#111111]"
             />
           </div>
         </motion.div>

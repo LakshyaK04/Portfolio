@@ -117,19 +117,45 @@ const Starfield = ({ className = "" }: StarfieldProps) => {
 
     const initSparkles = () => {
       sparkStars.length = 0;
-      // Very high density to match reference — ~1 per 250px²
+      // High density — ~1 per 250px²
       const count = Math.floor((width * height) / 250);
+
+      // Soft density patches — stars are slightly more likely near these
+      const patchCount = 3 + Math.floor(Math.random() * 3);
+      const patches: { cx: number; cy: number; r: number }[] = [];
+      for (let p = 0; p < patchCount; p++) {
+        patches.push({
+          cx: Math.random() * width,
+          cy: Math.random() * height,
+          r: Math.random() * Math.min(width, height) * 0.3 + 100
+        });
+      }
 
       for (let i = 0; i < count; i++) {
         const rand = Math.random();
-        const isLarge = rand > 0.9;      // 10% large bright sparkles
-        const isMedium = rand > 0.6 && rand <= 0.9; // 30% medium
+        const isLarge = rand > 0.9;
+        const isMedium = rand > 0.6 && rand <= 0.9;
 
+        // Subtle color tints — not all pure white
         let color = '255, 255, 255';
-        if (isLarge && Math.random() > 0.4) color = '220, 235, 255';
+        const colorRoll = Math.random();
+        if (colorRoll > 0.92) color = '200, 220, 255';     // cool blue
+        else if (colorRoll > 0.85) color = '255, 240, 220'; // warm amber
+        else if (colorRoll > 0.8) color = '230, 210, 255';  // soft violet
 
-        const sx = Math.random() * width;
-        const sy = Math.random() * height;
+        let sx = Math.random() * width;
+        let sy = Math.random() * height;
+
+        // ~25% of stars gently biased toward density patches
+        if (Math.random() < 0.25) {
+          const patch = patches[Math.floor(Math.random() * patches.length)];
+          const angle = Math.random() * Math.PI * 2;
+          const dist = Math.random() * patch.r;
+          sx = patch.cx + Math.cos(angle) * dist;
+          sy = patch.cy + Math.sin(angle) * dist;
+          sx = ((sx % width) + width) % width;
+          sy = ((sy % height) + height) % height;
+        }
 
         sparkStars.push({
           x: sx,
@@ -218,8 +244,40 @@ const Starfield = ({ className = "" }: StarfieldProps) => {
     // ============================================================
 
     const drawBackground = () => {
-      ctx.fillStyle = '#0e0e10';
+      ctx.fillStyle = '#111111';
       ctx.fillRect(0, 0, width, height);
+
+      // Subtle nebula tint patches — very faint atmospheric glow
+      ctx.globalCompositeOperation = 'screen';
+
+      const neb1 = ctx.createRadialGradient(
+        width * 0.2, height * 0.3, 0,
+        width * 0.2, height * 0.3, width * 0.35
+      );
+      neb1.addColorStop(0, 'rgba(20, 18, 35, 0.08)');
+      neb1.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = neb1;
+      ctx.fillRect(0, 0, width, height);
+
+      const neb2 = ctx.createRadialGradient(
+        width * 0.75, height * 0.55, 0,
+        width * 0.75, height * 0.55, width * 0.3
+      );
+      neb2.addColorStop(0, 'rgba(15, 15, 30, 0.06)');
+      neb2.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = neb2;
+      ctx.fillRect(0, 0, width, height);
+
+      const neb3 = ctx.createRadialGradient(
+        width * 0.5, height * 0.7, 0,
+        width * 0.5, height * 0.7, width * 0.25
+      );
+      neb3.addColorStop(0, 'rgba(25, 15, 20, 0.05)');
+      neb3.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = neb3;
+      ctx.fillRect(0, 0, width, height);
+
+      ctx.globalCompositeOperation = 'source-over';
     };
 
     // ============================================================
@@ -227,12 +285,14 @@ const Starfield = ({ className = "" }: StarfieldProps) => {
     // All dots always visible, just gently displaced
     // ============================================================
 
+    let time = 0;
+
     const updateAndDrawGrid = () => {
       // Smooth mouse interpolation
       mouseX += (targetMouseX - mouseX) * 0.1;
       mouseY += (targetMouseY - mouseY) * 0.1;
 
-      ctx.fillStyle = `rgba(255, 255, 255, ${DOT_ALPHA})`;
+      time += 0.015;
 
       for (const dot of gridDots) {
         // Cursor repulsion
@@ -263,6 +323,12 @@ const Starfield = ({ className = "" }: StarfieldProps) => {
         // Apply
         dot.x += dot.vx;
         dot.y += dot.vy;
+
+        // Subtle shimmer — slow wave based on position + time
+        const shimmer = 0.7 + 0.3 * Math.sin(
+          dot.baseX * 0.08 + dot.baseY * 0.06 + time
+        );
+        ctx.fillStyle = `rgba(255, 255, 255, ${DOT_ALPHA * shimmer})`;
 
         // Draw dot — always visible
         ctx.beginPath();
