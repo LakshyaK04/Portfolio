@@ -1,8 +1,12 @@
-import { motion } from 'framer-motion';
-import { Home, Download, ArrowUpRight, Copy } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Home, Download, ArrowUpRight, Copy, ChevronDown, ChevronUp } from 'lucide-react';
 import Starfield from './components/Starfield';
 
 function App() {
+  const [expandedExp, setExpandedExp] = useState<number | null>(null);
+  const [hoveredSkill, setHoveredSkill] = useState<number | null>(null);
+
   const copyEmail = () => {
     navigator.clipboard.writeText("hello@example.com");
     // Could add a toast here
@@ -250,6 +254,214 @@ function App() {
               </div>
             </motion.div>
 
+          </div>
+        </motion.section>
+
+        {/* ============================================================ */}
+        {/* EXPERIENCE SECTION */}
+        {/* ============================================================ */}
+
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="w-full mt-32 mb-20"
+        >
+          <div className="w-full h-px bg-zinc-800/60 mb-16" />
+          
+          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-10">
+            Experience
+          </h2>
+
+          <div className="flex flex-col relative">
+            {/* Vertical timeline line */}
+            <div className="absolute left-[21px] top-[44px] bottom-[44px] w-px bg-zinc-800/60" />
+
+            {/* Experience 1 */}
+            <div 
+              className="group flex items-start gap-6 cursor-pointer transition-all duration-300 relative z-10"
+              onClick={() => setExpandedExp(expandedExp === 0 ? null : 0)}
+            >
+              {/* Icon */}
+              <div className="w-11 h-11 rounded-xl bg-[#5C45FD] flex items-center justify-center shrink-0 mt-0.5">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 7H19M5 12H19M5 17H19" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              
+              {/* Content */}
+              <div className={`flex-1 ${expandedExp === 0 ? '' : 'pb-10'}`}>
+                <div className="flex justify-between items-start mb-2">
+                  <h3 className="text-white text-lg tracking-tight">
+                    <span className="font-bold">Emporium / IONIK</span> <span className="text-zinc-500 font-normal">- Co-Founder & Product Designer</span>
+                  </h3>
+                  {expandedExp === 0 ? (
+                    <ChevronUp size={20} className="text-zinc-400 mt-0.5" />
+                  ) : (
+                    <ChevronDown size={20} className="text-zinc-600 group-hover:text-zinc-400 transition-colors mt-0.5" />
+                  )}
+                </div>
+                <div className="flex items-center gap-4 text-zinc-500 text-sm">
+                  <span>Full-time</span>
+                  <span>May 2023 → Present</span>
+                  <span>Remote (London / Global)</span>
+                </div>
+
+                {/* Dropdown Content */}
+                <AnimatePresence>
+                  {expandedExp === 0 && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                      animate={{ height: "auto", opacity: 1, marginTop: 16 }}
+                      exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <ul className="list-disc pl-5 space-y-2 text-zinc-400 text-sm leading-relaxed marker:text-zinc-600 bg-[#1a1a1c] rounded-xl px-6 py-4">
+                        <li>Led 0→1 product vision for an AI CRM and customer engagement platform</li>
+                        <li>Built complete design system from foundation to production</li>
+                        <li>Shipped platform from concept to live product with measurable adoption</li>
+                      </ul>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
+
+            {/* Experience 2 */}
+            <div 
+              className="group flex items-start gap-6 cursor-pointer transition-all duration-300 relative z-10"
+              onClick={() => setExpandedExp(expandedExp === 1 ? null : 1)}
+            >
+              {/* Icon */}
+              <div className="w-11 h-11 rounded-xl bg-[#0a1f11] border border-emerald-900/50 flex items-center justify-center shrink-0 mt-0.5">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <circle cx="12" cy="12" r="4" fill="#10b981" fillOpacity="0.5"/>
+                </svg>
+              </div>
+              
+              {/* Content */}
+              <div className={`flex-1 ${expandedExp === 1 ? '' : 'pb-10'}`}>
+                <div className="flex justify-between items-start mb-2">
+                  <h3 className="text-white text-lg tracking-tight">
+                    <span className="font-bold">EleeN</span> <span className="text-zinc-500 font-normal">- Lead Product Designer</span>
+                  </h3>
+                  {expandedExp === 1 ? (
+                    <ChevronUp size={20} className="text-zinc-400 mt-0.5" />
+                  ) : (
+                    <ChevronDown size={20} className="text-zinc-600 group-hover:text-zinc-400 transition-colors mt-0.5" />
+                  )}
+                </div>
+                <div className="flex items-center gap-4 text-zinc-500 text-sm">
+                  <span>Part-time</span>
+                  <span>Aug 2023 → Present</span>
+                  <span>Remote (Saudi Arabia)</span>
+                </div>
+
+                {/* Dropdown Content */}
+                <AnimatePresence>
+                  {expandedExp === 1 && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                      animate={{ height: "auto", opacity: 1, marginTop: 16 }}
+                      exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <ul className="list-disc pl-5 space-y-2 text-zinc-400 text-sm leading-relaxed marker:text-zinc-600 bg-[#1a1a1c] rounded-xl px-6 py-4">
+                        <li>Designed end-to-end Enterprise SaaS platform for B2B clients</li>
+                        <li>Created comprehensive data visualization interfaces and dashboards</li>
+                        <li>Delivered complete product strategy and design across Arabic and English interfaces</li>
+                      </ul>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* ============================================================ */}
+        {/* WHAT I DO BEST SECTION */}
+        {/* ============================================================ */}
+
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="w-full mt-32 mb-20"
+        >
+          <div className="w-full h-px bg-zinc-800/60 mb-16" />
+          
+          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-10">
+            What I Do Best
+          </h2>
+
+          <div 
+            className="flex flex-col"
+            onMouseLeave={() => setHoveredSkill(null)}
+          >
+            {[
+              {
+                num: '01',
+                title: 'From zero to one',
+                desc: "I don't wait for briefs to be perfect. I take ambiguity and shape it into flows, interfaces, and prototypes \u2014 iterating until the product feels inevitable."
+              },
+              {
+                num: '02',
+                title: 'Systems over screens',
+                desc: 'I build the rules, not just the pages. Token systems, component libraries, and documentation that let teams ship faster without losing coherence.'
+              },
+              {
+                num: '03',
+                title: 'Strategy meets craft',
+                desc: 'I connect business goals to pixel-level decisions. Every layout, interaction, and micro-copy choice is rooted in user needs and product strategy.'
+              },
+              {
+                num: '04',
+                title: 'Design speaks code',
+                desc: 'I bridge the gap between design and engineering. I understand frontend architecture and write production-aware specs that developers actually want to build.'
+              }
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="group cursor-default"
+                onMouseEnter={() => setHoveredSkill(i)}
+              >
+                <div className={`flex items-baseline gap-6 py-7 border-b border-zinc-800/40 transition-all duration-300 ${
+                  hoveredSkill !== null && hoveredSkill !== i ? 'opacity-40' : 'opacity-100'
+                }`}>
+                  <span className={`text-xs font-mono transition-colors duration-300 ${
+                    hoveredSkill === i ? 'text-white' : 'text-zinc-600'
+                  }`}>
+                    {item.num}
+                  </span>
+                  <div className="flex-1">
+                    <h3 className={`text-lg font-bold tracking-tight transition-colors duration-300 ${
+                      hoveredSkill === i ? 'text-white' : 'text-zinc-400'
+                    }`}>
+                      {item.title}
+                    </h3>
+                    <AnimatePresence>
+                      {hoveredSkill === i && (
+                        <motion.p
+                          initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                          animate={{ height: 'auto', opacity: 1, marginTop: 12 }}
+                          exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                          transition={{ duration: 0.25, ease: 'easeInOut' }}
+                          className="text-zinc-500 text-sm leading-relaxed overflow-hidden"
+                        >
+                          {item.desc}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </motion.section>
         
