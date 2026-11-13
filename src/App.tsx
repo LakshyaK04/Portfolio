@@ -35,7 +35,7 @@ function Navigation() {
           Contact Me
         </Link>
         <a
-          href="https://drive.google.com/file/d/1odoUdZCXTGj6MNZ-9pBesp1AYWpGH90f/view?usp=sharing"
+          href="https://drive.google.com/file/d/1zPoox-x_vkS2gS6M6763eAYfPr62L0Ag/view?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
           className="bg-[#1c1c1e] hover:bg-[#2c2c2e] transition-colors px-4 py-2 rounded-full text-sm font-medium text-zinc-300 flex items-center"

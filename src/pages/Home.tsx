@@ -85,7 +85,7 @@ export default function Home() {
             <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform text-zinc-500" />
           </button>
           <a 
-            href="https://drive.google.com/file/d/1odoUdZCXTGj6MNZ-9pBesp1AYWpGH90f/view?usp=sharing" 
+            href="https://drive.google.com/file/d/1zPoox-x_vkS2gS6M6763eAYfPr62L0Ag/view?usp=sharing" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="group flex items-center gap-2 bg-[#1c1c1e] hover:bg-[#2c2c2e] text-zinc-300 px-5 py-2.5 rounded-full text-sm font-medium transition-all"
